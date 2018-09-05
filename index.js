@@ -1,29 +1,15 @@
 #!/usr/bin/env node
 
-var colors = require('colors/safe');
 const prompt = require('prompt');
 const node_ssh = require('node-ssh');
 const ssh = new node_ssh();
+const configParser = require('./config-parser')
+const colors = require('colors/safe');
 
 require('dotenv').config();
 
-try {
-    
-    var config = require(process.cwd()+'/.ssh-commands.json');
-
-} catch (error) {
-
-    console.warn(colors.yellow("Simple SSH Commands: You are missing an '.ssh-commands' file in your root directory."));
-    return;
-    
-}
-
-const optionDefinitions = [
-  { name: 'config-key', alias: 'c', type: String },
-]
-const commandLineArgs = require('command-line-args')
-const options = commandLineArgs(optionDefinitions)
-
+var config = catchErrors(configParser.parseConfig);
+  
 // Credendtials used to log in
 const credentials = {
     username: config.username,
@@ -31,7 +17,7 @@ const credentials = {
     password: process.env.DEPLOY_PASSWORD
   };
 const commands = config.commands;
-  
+
   // When the password exists (in .env file) don't ask for password
   if (credentials.password) {
     executeDeploy(credentials);
@@ -77,5 +63,13 @@ const commands = config.commands;
         ssh.dispose();
       });
     });
+  }
+
+  function catchErrors(fn) {
+    try {
+      return fn();
+    } catch (error) {
+      throw new Error(colors.red("Simple SSH Commands Problem:\n") + colors.yellow(error.message));
+    }
   }
   
