@@ -22,5 +22,11 @@
   "bugs": {
     "url": "https://github.com/simonvomeyser/simple-ssh-commands/issues"
   },
-  "homepage": "https://github.com/simonvomeyser/simple-ssh-commands#readme"
+  "homepage": "https://github.com/simonvomeyser/simple-ssh-commands#readme",
+  "dependencies": {
+    "colors": "^1.3.2",
+    "dotenv": "^6.0.0",
+    "node-ssh": "^5.1.2",
+    "prompt": "^1.0.0"
+  }
 }
