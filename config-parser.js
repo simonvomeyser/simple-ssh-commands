@@ -1,19 +1,56 @@
 const commandLineArgs = require("command-line-args");
 const fs = require('fs');
 const find = require('lodash').find
+const colors = require('colors/safe');
+
+require('dotenv').config();
 
 const allowedCommandLineArgs = [
   { name: "config-key", alias: "c", type: String }
 ];
-const actualCommandLineArgs = commandLineArgs(allowedCommandLineArgs);
 
 module.exports = {
   parseConfig: function() {
+      var actualCommandLineArgs = commandLineArgs(allowedCommandLineArgs);
+
       var configFileContent = readConfigFile();
 
-      return parseConfigFromFile(configFileContent, actualCommandLineArgs);
+      var parsedConfig =  parseConfigFromFile(configFileContent, actualCommandLineArgs);
+
+      var password = parsePassword(actualCommandLineArgs);
+
+      var config = {
+        credentials: {
+          user: parsedConfig.user,
+          host: parsedConfig.host,
+          password: password
+        },
+        commands: parsedConfig.commands
+      }
+
+      return config;
   }
 };
+
+function parsePassword(actualCommandLineArgs) {
+
+  var key = actualCommandLineArgs['config-key'];
+  var envKey;
+  var password;
+  // Make different passwords possible
+  if(key) {
+    envKey = 'SSC_DEPLOY_PASSWORD_' + key.toUpperCase();
+  } else {
+    envKey = 'SSC_DEPLOY_PASSWORD';
+  }
+
+  if (!password) {
+    console.log(colors.green('Simple SSH Commands: You can add your Password to an .env file by adding the key '+envKey+' there.'))
+  }
+
+  return password;
+
+}
 
 function parseConfigFromFile(configFileContent, actualCommandLineArgs) {
   if (Array.isArray(configFileContent)) {

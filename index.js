@@ -6,24 +6,16 @@ const ssh = new node_ssh();
 const configParser = require('./config-parser')
 const colors = require('colors/safe');
 
-require('dotenv').config();
-
 var config = catchErrors(configParser.parseConfig);
   
 // Credendtials used to log in
-const credentials = {
-    username: config.username,
-    host: config.host,
-    password: process.env.DEPLOY_PASSWORD
-  };
-const commands = config.commands;
 
   // When the password exists (in .env file) don't ask for password
-  if (credentials.password) {
-    executeDeploy(credentials);
+  if (config.credentials.password) {
+    executeDeploy(config.credentials, config.commands);
   } else {
-    askForPassword(credentials)
-      .then(credentialsWithPassword => executeDeploy(credentialsWithPassword))
+    askForPassword(config.credentials)
+      .then(credentialsWithPassword => executeDeploy(credentialsWithPassword, config.commands))
       .catch(error => console.log('An error occured'));
   }
   
@@ -36,10 +28,9 @@ const commands = config.commands;
     return new Promise((resolve, reject) => {
       console.log(
         'Enter Password for ' +
-        credentials.username +
+        credentials.user +
         '@' +
-        credentials.host +
-        ' (Or add DEPLOY_PASSWORD to your .env file)'
+        credentials.host
       );
   
       return prompt.get(['password'], function (err, result) {
@@ -55,7 +46,7 @@ const commands = config.commands;
    * Connects to the server with credentials and prints output to console
    * @param {object} credentials
    */
-  function executeDeploy(credentials) {
+  function executeDeploy(credentials, commands) {
     ssh.connect(credentials).then(function () {
       ssh.execCommand(commands.join(' && ') + ' \n').then(function (result) {
         console.log(result.stdout);
