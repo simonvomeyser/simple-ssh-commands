@@ -1,0 +1,26 @@
+{
+  "name": "simple-ssh-commands",
+  "version": "0.1.0",
+  "description": "A NPM package to execute simple tasks like a git pull via SSH",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "bin": "./bin",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/simonvomeyser/simple-ssh-commands.git"
+  },
+  "keywords": [
+    "ssh",
+    "simple",
+    "deploy",
+    "git"
+  ],
+  "author": "Simon vom Eyser <simon.vom.eyser@gmail.com> (https://simonvomeyser.de)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/simonvomeyser/simple-ssh-commands/issues"
+  },
+  "homepage": "https://github.com/simonvomeyser/simple-ssh-commands#readme"
+}
