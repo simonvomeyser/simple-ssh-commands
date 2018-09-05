@@ -44,6 +44,8 @@ function parsePassword(actualCommandLineArgs) {
     envKey = 'SSC_DEPLOY_PASSWORD';
   }
 
+  password = process.env[envKey];
+
   if (!password) {
     console.log(colors.green('Simple SSH Commands: You can add your Password to an .env file by adding the key '+envKey+' there.'))
   }
