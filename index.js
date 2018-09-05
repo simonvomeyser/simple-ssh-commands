@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 var colors = require('colors/safe');
 const prompt = require('prompt');
 const node_ssh = require('node-ssh');
@@ -15,6 +17,12 @@ try {
     return;
     
 }
+
+const optionDefinitions = [
+  { name: 'config-key', alias: 'c', type: String },
+]
+const commandLineArgs = require('command-line-args')
+const options = commandLineArgs(optionDefinitions)
 
 // Credendtials used to log in
 const credentials = {
