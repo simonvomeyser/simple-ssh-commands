@@ -21,7 +21,7 @@ module.exports = {
 
       var config = {
         credentials: {
-          user: parsedConfig.user,
+          username: parsedConfig.username,
           host: parsedConfig.host,
           password: password
         },
