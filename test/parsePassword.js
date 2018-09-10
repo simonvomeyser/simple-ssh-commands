@@ -1,7 +1,7 @@
 var assert = require('assert');
 var parsePassword = require('../parsePassword');
 
-describe('Simple SSH Password', function() {
+describe('Parse Password Function', function() {
     it('Should simple return the password when passed one', function() {
       assert.equal(parsePassword({password: "12345"}), 12345);
     });
