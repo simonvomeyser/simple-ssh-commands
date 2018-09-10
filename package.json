@@ -6,7 +6,7 @@
   "scripts": {
     "test": "mocha"
   },
-  "bin": "./index.js",
+  "bin": "./cli.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/simonvomeyser/simple-ssh-commands.git"
