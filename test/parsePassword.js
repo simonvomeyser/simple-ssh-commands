@@ -8,6 +8,9 @@ describe('Simple SSH Password', function() {
     it('Returns nothing when nothing was passed', function() {
       assert.equal(parsePassword(), '');
     });
+    it('Returns nothing when nothing but an empty object was passed', function() {
+      assert.equal(parsePassword({password: undefined, configKey: undefined}), '');
+    });
     it('Returns the env password if the key exists', function() {
       process.env.SSC_DEPLOY_PASSWORD = 12345;
       assert.equal(parsePassword(), '12345');
