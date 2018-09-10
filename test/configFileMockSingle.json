@@ -1,0 +1,5 @@
+{
+    "username": "Test",
+    "host": "example.com",
+    "commands": ["la -la", "php -v"]
+}

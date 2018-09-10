@@ -1,0 +1,21 @@
+[
+    {
+        "key" : "test-key-1",
+        "username": "Test1",
+        "host": "example.com",
+        "commands": ["la -la", "php -v"]
+    },
+    {
+        "key" : "test-key-2",
+        "username": "Test2",
+        "host": "example-2.com",
+        "commands": ["git pull"]
+    },
+    {
+        "key" : "test-key-3",
+        "username": "Test3",
+        "password": "12345",
+        "host": "example-3.com",
+        "commands": ["npm install"]
+    }
+]
