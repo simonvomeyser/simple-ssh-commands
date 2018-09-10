@@ -1,5 +1,5 @@
 var assert = require('assert');
-var parsePassword = require('../SimpleSSHPassword');
+var parsePassword = require('../parsePassword');
 
 describe('Simple SSH Password', function() {
     it('Should simple return the password when passed one', function() {
