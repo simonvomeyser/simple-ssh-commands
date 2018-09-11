@@ -2,9 +2,9 @@
 
 [![Build Status](https://travis-ci.org/simonvomeyser/simple-ssh-commands.svg?branch=master)](https://travis-ci.org/simonvomeyser/simple-ssh-commands)
 
-This package aims to make executing simple SSH Commands like a `git pull`  on your server as easy as possible. 
+This package aims to make executing simple SSH Commands like a `git pull`  on your server as easy as possible. It also has a better approach to handle passwords than other packages.
 
-All you need to provide is .json file with credentials and commands.
+All you will need is a config file with credentials (username and host) and your commands.
 
 ## How to install and prepare
 
@@ -23,7 +23,7 @@ Then create a `.simple-ssh-commands` file in the same folder as your `package.js
 }
 ```
 
-And *that's basically it*. You can run the commands by calling the binary directly:
+And **that's basically it**. You can run the commands by calling the binary directly:
 
 ```
 node_modules/.bin/simple-ssh-commands
