@@ -7,8 +7,6 @@ module.exports = function SimpleSSHCommands(arguments) {
 
   const config = new SimpleSSHConfig(this.argument);
 
-  console.log(config);
-
   if (config.credentials.password) {
     executeDeploy(config.credentials, config.commands);
   } else {
