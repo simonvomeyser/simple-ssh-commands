@@ -44,15 +44,17 @@ or add a script to your `package.json` like so:
 }
 ```
 
+and then run `npm run execute-ls-on-server` or whatever you named you script.
+
 ## Password handling
 
 Passwords *can* be added to your `.simple-ssh-commands` file. This is only a good idea if you do not commit this file though. 
 
 This Package supports two other ways to handle your passwords:
 
-1. If you don't add it to your `.simple-ssh-commands` file you will be prompted every time to enter it when you want to run the commands. Just enter the password then and the commands will be run if everything is correct.
+1. If you don't add it to your `.simple-ssh-commands` file you will be prompted every time to enter it when you want to run the commands. Just enter password and the commands will be run.
 
-2. If this process is to cumbersome for you, there is the possibility to greate `.env` file (if you don't already have one) in your projects root. You can add the key value pair `SSC_PASSWORD=12345` (with your password) to it. The password will be taken from there if the key is found.
+2. If this process is to cumbersome for you, there is the possibility to create a `.env` file (if you don't already have one) in your projects root. You can add the key value pair `SSC_PASSWORD=12345` (with your password) to it. The password will be taken from there if the key is found.
 
 ## Multiple connections and commands
 
@@ -76,6 +78,27 @@ This package supports multiple connections or different commands for the same co
 ]
 ```
 
-If you still call the `simple-ssh-commands` command without an argument the first key of the array will be used. But you are now able to pass the name of the key that should be run. `simple-ssh-commands show-content`.
+If you still call the `simple-ssh-commands` command without an argument the first key of the array will be used. But you are now able to pass the name of the key that should be run. Here is an example of a `package.json` file using the feature.
 
+```json
+// package.json
+{
+  "name": "test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "show-content": "simple-ssh-commands show-content",
+    "git-pull": "simple-ssh-commands git-pull"
+  },
+  "author": "Simon vom Eyser",
+  "license": "ISC"
+}
+```
 
+Passwords in your `.env` file will need the commands name as a postfix (uppercase with underscores for dashes) though.
+
+```env
+SSC_PASSWORD_SHOW_CONTENT=12345
+SSC_PASSWORD_GIT_PULL=12345
+```
