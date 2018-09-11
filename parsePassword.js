@@ -30,7 +30,8 @@ module.exports = function parsePassword(args) {
  */
 function getEnvKey(configKey) {
   if (configKey) {
-    return "SSC_PASSWORD_" + configKey.toUpperCase();
+    const upperCaseUnderscoreConfigKey = configKey.toUpperCase().replace(/-/g, '_');
+    return "SSC_PASSWORD_" + upperCaseUnderscoreConfigKey;
   } else {
     return "SSC_PASSWORD";
   }

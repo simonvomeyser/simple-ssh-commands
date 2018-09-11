@@ -17,6 +17,10 @@ describe('Parse Password Function', function() {
     });    
     it('Returns the env password of the key passed', function() {
       process.env.SSC_PASSWORD_TEST = 12345;
-      assert.equal(parsePassword({configKey: 'TEST'}), '12345');
+      assert.equal(parsePassword({configKey: 'test'}), '12345');
+    });
+    it('Returns the env password of a key with dashes passed', function() {
+      process.env.SSC_PASSWORD_TEST_COMMAND_WITH_DASH = 12345;
+      assert.equal(parsePassword({configKey: 'test-command-with-dash'}), '12345');
     });
 });
