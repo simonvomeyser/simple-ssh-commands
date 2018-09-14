@@ -14,7 +14,7 @@ module.exports = function SimpleSSHCommands(arguments) {
       .then(credentialsWithPassword =>
         executeDeploy(credentialsWithPassword, config.commands)
       )
-      .catch(error => console.log("An error occured"));
+      .catch(() => console.log("Abort"));
   }
   
   /**
@@ -33,7 +33,10 @@ module.exports = function SimpleSSHCommands(arguments) {
           password : { hidden: true, required: true, }
         }
       }, function(err, result) {
-        if (err) reject(err);
+        if (err) {
+          reject(err)
+          return;
+        };
   
         credentials.password = result.password;
         resolve(credentials);
