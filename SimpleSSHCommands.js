@@ -52,6 +52,9 @@ module.exports = function SimpleSSHCommands(arguments) {
     var conn = new Client();
   
     conn
+      .on('error', function() {
+        console.log("Connection not possible. Do your credentials match?");
+      })
       .on("ready", function() {
         conn.shell(function(err, stream) {
           if (err) throw err;
@@ -72,7 +75,8 @@ module.exports = function SimpleSSHCommands(arguments) {
             stream.write(commands.join('\n\n')) ;
             stream.end('\n exit \n') ;
             
-        });
-      }).connect(credentials);
+        })
+      })
+      .connect(credentials)
   }
 };
