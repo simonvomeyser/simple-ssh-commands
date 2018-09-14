@@ -27,8 +27,12 @@ module.exports = function SimpleSSHCommands(arguments) {
       console.log(
         "Enter Password for " + credentials.username + "@" + credentials.host
       );
-  
-      return prompt.get(["password"], function(err, result) {
+
+      return prompt.get({
+        properties: {
+          password : { hidden: true, required: true, }
+        }
+      }, function(err, result) {
         if (err) reject(err);
   
         credentials.password = result.password;
