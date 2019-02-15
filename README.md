@@ -102,3 +102,8 @@ Passwords in your `.env` file will need the commands name as a postfix (uppercas
 SSC_PASSWORD_SHOW_CONTENT=12345
 SSC_PASSWORD_GIT_PULL=12345
 ```
+
+# Roadmap
+
+- Add the possibility to pass a SSH-Key and use that
+- Improve server output display since it is still quite confusing.
