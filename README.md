@@ -105,5 +105,8 @@ SSC_PASSWORD_GIT_PULL=12345
 
 # Roadmap
 
+If somebody is interested in this let me know, there is a lot that could be optimized about this package!
+
+- Make it possible to provide `host` and `username` in an `.env` file so these things don't end up in version control
 - Add the possibility to pass a SSH-Key and use that
 - Improve server output display since it is still quite confusing.
