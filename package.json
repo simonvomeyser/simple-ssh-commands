@@ -1,6 +1,6 @@
 {
   "name": "simple-ssh-commands",
-  "version": "0.3.3",
+  "version": "0.4.0",
   "description": "A NPM package to execute simple tasks like a git pull via SSH",
   "main": "index.js",
   "scripts": {
