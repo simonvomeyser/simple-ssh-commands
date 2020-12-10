@@ -1,4 +1,4 @@
-const prompt = require("prompt");
+const {prompt} = require("enquirer");
 const Client = require("ssh2").Client;
 const SimpleSSHConfig = require("./SimpleSSHConfig");
 
@@ -14,36 +14,32 @@ module.exports = function SimpleSSHCommands(arguments) {
       .then(credentialsWithPassword =>
         executeDeploy(credentialsWithPassword, config.commands)
       )
-      .catch(() => console.log("Abort"));
+      .catch((e) => console.log(e));
   }
-  
+
   /**
    * Prompts for password
    * @param {object} credentials
    * @return {Promise}
    */
   function askForPassword(credentials) {
-    return new Promise((resolve, reject) => {
+
+    return new Promise((resolve) => {
       console.log(
-        "Enter Password for " + credentials.username + "@" + credentials.host
+          "Enter Password for " + credentials.username + "@" + credentials.host
       );
 
-      return prompt.get({
-        properties: {
-          password : { hidden: true, required: true, }
-        }
-      }, function(err, result) {
-        if (err) {
-          reject(err)
-          return;
-        };
-  
-        credentials.password = result.password;
+      return prompt({
+        type: 'password',
+        name: 'password',
+      }).then(({password}) => {
+        credentials.password =password;
         resolve(credentials);
-      });
+      })
+      .catch((e) => console.log(e));
     });
   }
-  
+
   /**
    * Connects to the server with credentials and prints the combined output to console
    * @param {object} credentials
