@@ -29,7 +29,7 @@
     "dotenv": "^6.0.0",
     "enquirer": "^2.3.6",
     "lodash": "^4.17.10",
-    "ssh2": "^0.6.1"
+    "ssh2": "^1.4.0"
   },
   "devDependencies": {
     "mocha": "^8.2.1",
